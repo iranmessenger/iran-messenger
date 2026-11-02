@@ -1,0 +1,7 @@
+html, body { height: 100%; margin: 0; background: #04122B; }
+#boot {
+  position: fixed; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 18px;
+  font-family: system-ui, sans-serif; color: #c9d6ee; font-size: 14px;
+}
+#boot img { border-radius: 22px; }

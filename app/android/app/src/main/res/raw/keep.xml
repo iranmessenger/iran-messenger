@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The BUZZ sounds are only named from Dart (notification channels), so
+     resource shrinking must not drop them. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/buzz_doorbell,@raw/buzz_knock,@raw/buzz_classic" />

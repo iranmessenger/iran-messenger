@@ -1,0 +1,28 @@
+name: irm_news_bot
+description: >-
+  News bot for IRAN Messenger. Every few hours it gathers news from RSS
+  feeds, has an AI service (GapGPT, OpenAI-compatible) summarise it in
+  Persian, and posts the summary to every group it has been added to. It is
+  an ordinary end-to-end encrypted member that only posts: the server marks
+  it as a bot, so members' apps send it nothing they write.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  irm_core:
+    path: ../packages/irm_core
+  crypto: ^3.0.3
+  http: ^1.2.0
+  xml: ^6.5.0
+
+dev_dependencies:
+  test: ^1.25.0
+
+# The account database holds the bot's keys; it must be the encrypted build.
+hooks:
+  user_defines:
+    sqlite3:
+      source: sqlite3mc

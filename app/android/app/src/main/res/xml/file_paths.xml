@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Only the folder a file is copied to just before it is opened. -->
+<paths>
+    <cache-path name="open" path="open/" />
+</paths>

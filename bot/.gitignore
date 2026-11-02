@@ -1,0 +1,5 @@
+.dart_tool/
+build/
+# The bot account and its settings (holds the AI key).
+irm_bot_data/
+data/

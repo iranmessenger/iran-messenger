@@ -1,0 +1,50 @@
+# IRAN Messenger web app.
+Options -Indexes
+
+<IfModule mod_mime.c>
+    AddType application/wasm .wasm
+    AddType application/manifest+json .webmanifest
+</IfModule>
+
+# WebAssembly and fonts are stored ready-compressed next to the originals
+# (file.wasm.br, file.wasm.gz); send those to browsers that accept them.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{HTTP:Accept-Encoding} \bbr\b
+    RewriteCond %{REQUEST_FILENAME}.br -f
+    RewriteRule ^(.+)\.wasm$ $1.wasm.br [L,T=application/wasm,E=no-gzip:1,E=no-brotli:1]
+    RewriteCond %{HTTP:Accept-Encoding} \bgzip\b
+    RewriteCond %{REQUEST_FILENAME}.gz -f
+    RewriteRule ^(.+)\.wasm$ $1.wasm.gz [L,T=application/wasm,E=no-gzip:1,E=no-brotli:1]
+
+    RewriteCond %{HTTP:Accept-Encoding} \bbr\b
+    RewriteCond %{REQUEST_FILENAME}.br -f
+    RewriteRule ^(.+)\.(ttf|otf)$ $1.$2.br [L,T=font/$2,E=no-gzip:1,E=no-brotli:1]
+    RewriteCond %{HTTP:Accept-Encoding} \bgzip\b
+    RewriteCond %{REQUEST_FILENAME}.gz -f
+    RewriteRule ^(.+)\.(ttf|otf)$ $1.$2.gz [L,T=font/$2,E=no-gzip:1,E=no-brotli:1]
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(wasm|ttf|otf)\.br$">
+        Header set Content-Encoding "br"
+        Header append Vary "Accept-Encoding"
+    </FilesMatch>
+    <FilesMatch "\.(wasm|ttf|otf)\.gz$">
+        Header set Content-Encoding "gzip"
+        Header append Vary "Accept-Encoding"
+    </FilesMatch>
+
+    # Always ask the server whether the app changed; unchanged files cost
+    # one short "not modified" answer.
+    <FilesMatch "\.(html|js|json|css|wasm|br|gz)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+
+    # The page may only load code from here and only talk to this site.
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src 'self' blob:; font-src 'self' data:; connect-src 'self' https: blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "no-referrer"
+    Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>

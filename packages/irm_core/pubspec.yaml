@@ -1,0 +1,26 @@
+name: irm_core
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.12.2
+
+# Add regular dependencies here.
+dependencies:
+  archive: ^4.0.0
+  cryptography: ^2.9.0
+  http: ^1.6.0
+  libsignal_protocol_dart: ^0.8.2
+  sqlite3: ^3.5.2
+  web: ^1.1.0
+  # path: ^1.9.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
+
+hooks:
+  user_defines:
+    sqlite3:
+      source: sqlite3mc

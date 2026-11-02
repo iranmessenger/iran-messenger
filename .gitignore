@@ -1,0 +1,15 @@
+.dart_tool/
+build/
+dist/
+waf_evidence.jsonl
+*.log
+.env
+
+# Web app build output, produced by scripts/build-web.sh
+plugin/iran-messenger/app/
+
+
+# Signing keys never belong in the repository.
+*.jks
+*.keystore
+key.properties

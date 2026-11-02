@@ -1,0 +1,6 @@
+Fallback fonts served with the web app so that no text is fetched from a third party.
+
+Noto Color Emoji, Noto Sans Arabic, Noto Sans Math, Noto Sans Symbols, Noto Sans Symbols 2:
+  Copyright Google LLC and the Noto Project Authors. SIL Open Font License 1.1 (https://openfontlicense.org).
+Roboto:
+  Copyright Google LLC. SIL Open Font License 1.1 / Apache License 2.0.
